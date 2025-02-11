@@ -1,0 +1,70 @@
+export default {
+  "users/me": {
+    userId: 2,
+    username: "admin",
+    nickname: "系统管理员",
+    avatar: "https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif",
+    roles: ["ADMIN"],
+    perms: [
+      "sys:notice:edit",
+      "sys:menu:delete",
+      "sys:dict:edit",
+      // ... 其他权限
+    ],
+  },
+  "users/page": {
+    list: [
+      {
+        id: 2,
+        username: "admin",
+        nickname: "系统管理员",
+        mobile: "17621210366",
+        gender: 1,
+        avatar: "https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif",
+        email: "",
+        status: 1,
+        deptId: 1,
+        roleIds: [2],
+      },
+      {
+        id: 3,
+        username: "test",
+        nickname: "测试小用户",
+        mobile: "17621210366",
+        gender: 1,
+        avatar: "https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif",
+        email: "youlaitech@163.com",
+        status: 1,
+        deptId: 3,
+        roleIds: [3],
+      },
+    ],
+    total: 2,
+  },
+
+  "users/:userId/form": {
+    id: 2,
+    username: "admin",
+    nickname: "系统管理员",
+    mobile: "17621210366",
+    gender: 1,
+    avatar: "https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif",
+    email: "",
+    status: 1,
+    deptId: 1,
+    roleIds: [2],
+  },
+
+  "users/profile": {
+    id: 2,
+    username: "admin",
+    nickname: "系统管理员",
+    avatar: "https://foruda.gitee.com/images/1723603502796844527/03cdca2a_716974.gif",
+    gender: 1,
+    mobile: "17621210366",
+    email: null,
+    deptName: "有来技术",
+    roleNames: "系统管理员",
+    createTime: "2019-10-10",
+  },
+};

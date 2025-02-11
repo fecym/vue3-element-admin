@@ -1,0 +1,106 @@
+{
+  "name": "vue3-element-admin",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:analyze": "VITE_ANALYZE=true vite build",
+    "preview": "vite preview",
+    "build-only": "vite build",
+    "lint:eslint": "eslint --fix ./src",
+    "lint:prettier": "prettier --write \"**/*.{js,cjs,json,jsx,css,less,scss,vue,html,md}\"",
+    "lint:stylelint": "stylelint  \"**/*.{css,scss,vue}\" --fix",
+    "lint:lint-staged": "lint-staged",
+    "lint": "pnpm lint:eslint && pnpm lint:prettier && pnpm lint:stylelint",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky",
+    "depcheck": "npx depcheck ."
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{cjs,json}": [
+      "prettier --write"
+    ],
+    "*.{vue,html}": [
+      "eslint --fix",
+      "prettier --write",
+      "stylelint --fix"
+    ],
+    "*.{scss,css}": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.md": [
+      "prettier --write"
+    ]
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.3.1",
+    "@stomp/stompjs": "^7.0.0",
+    "@vee-validate/i18n": "^4.15.0",
+    "@vee-validate/rules": "^4.15.0",
+    "@vueuse/core": "^10.11.1",
+    "@wangeditor-next/editor": "^5.6.29",
+    "@wangeditor-next/editor-for-vue": "^5.1.14",
+    "axios": "^1.7.9",
+    "boxen": "^8.0.1",
+    "dayjs": "^1.11.13",
+    "echarts": "^5.6.0",
+    "element-plus": "^2.9.3",
+    "exceljs": "^4.4.0",
+    "lodash-es": "^4.17.21",
+    "nprogress": "^0.2.0",
+    "path-browserify": "^1.0.1",
+    "path-to-regexp": "^6.3.0",
+    "pinia": "^2.3.0",
+    "qs": "^6.14.0",
+    "vee-validate": "^4.15.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.0"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.6.1",
+    "@commitlint/config-conventional": "^19.6.0",
+    "@eslint/js": "^9.18.0",
+    "@vitejs/plugin-vue": "^5.2.1",
+    "autoprefixer": "^10.4.20",
+    "eslint": "^9.18.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.3",
+    "eslint-plugin-vue": "^9.32.0",
+    "globals": "^15.14.0",
+    "gradient-string": "^3.0.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.4.1",
+    "postcss": "^8.5.1",
+    "postcss-html": "^1.8.0",
+    "postcss-scss": "^4.0.9",
+    "prettier": "^3.4.2",
+    "sass": "^1.83.4",
+    "simple-git": "^3.27.0",
+    "stylelint": "^16.13.2",
+    "stylelint-config-html": "^1.1.0",
+    "stylelint-config-recess-order": "^5.1.1",
+    "stylelint-config-recommended-scss": "^14.1.0",
+    "stylelint-config-recommended-vue": "^1.5.0",
+    "stylelint-config-standard": "^36.0.1",
+    "terser": "^5.37.0",
+    "unocss": "0.65.3",
+    "unplugin-auto-import": "^0.18.6",
+    "unplugin-element-plus": "^0.9.1",
+    "unplugin-vue-components": "^0.27.5",
+    "vite": "^6.0.7",
+    "vite-bundle-analyzer": "^0.16.1",
+    "vite-plugin-legacy-swc": "^1.2.3",
+    "vite-plugin-svg-icons": "^2.0.1",
+    "vue-eslint-parser": "^9.4.3"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
