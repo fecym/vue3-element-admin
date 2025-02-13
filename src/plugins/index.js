@@ -3,6 +3,7 @@ import { setupRouter } from "@/router/index.js";
 import { setupStore } from "@/store/index.js";
 import { setupElIcons } from "./icons";
 import { setupPermission } from "./permission.js";
+import { setupMicroApp } from "./micro-app.js";
 // import webSocketManager from "@/utils/websocket";
 import "./element-plus.js";
 import "./vee-validate.js";
@@ -20,6 +21,8 @@ export default {
     setupElIcons(app);
     // 路由守卫
     setupPermission();
+    // 微前端
+    setupMicroApp();
     // 初始化 WebSocket
     // webSocketManager.setupWebSocket();
   },

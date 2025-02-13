@@ -11,6 +11,9 @@ importers:
       '@element-plus/icons-vue':
         specifier: ^2.3.1
         version: 2.3.1(vue@3.5.13(typescript@5.7.3))
+      '@micro-zoe/micro-app':
+        specifier: 1.0.0-rc.20
+        version: 1.0.0-rc.20
       '@stomp/stompjs':
         specifier: ^7.0.0
         version: 7.0.0
@@ -727,6 +730,9 @@ packages:
 
   '@kwsites/promise-deferred@1.1.1':
     resolution: {integrity: sha512-GaHYm+c0O9MjZRu0ongGBRbinu8gVAMd2UZjji6jVmqKtZluZnptXGWhz1E8j8D2HJ3f/yMxKAUC0b+57wncIw==}
+
+  '@micro-zoe/micro-app@1.0.0-rc.20':
+    resolution: {integrity: sha512-RFTPoTnHfTPEeXCF0V8X0i4mkn+d0ecnn29SqQKXz3O34pQ/6F6OAeFWJ0xFHVE2uwK5ldt34oIJWUAl/vsiVw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4697,6 +4703,8 @@ snapshots:
       - supports-color
 
   '@kwsites/promise-deferred@1.1.1': {}
+
+  '@micro-zoe/micro-app@1.0.0-rc.20': {}
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:

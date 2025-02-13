@@ -26,7 +26,7 @@ const pathSrc = resolve(__dirname, "src");
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd());
   return {
-    // base: "/",
+    base: env.VITE_APP_BASE_PATH,
     resolve: {
       alias: { "@": pathSrc },
       extensions: [".js", ".vue", ".json", ".scss", ".mjs"],
@@ -43,6 +43,9 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+      },
       host: "0.0.0.0",
       port: +env.VITE_APP_PORT,
       open: true,
@@ -56,7 +59,13 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      vue(),
+      vue({
+        template: {
+          compilerOptions: {
+            isCustomElement: tag => /^micro-app/.test(tag),
+          },
+        },
+      }),
       UnoCSS({ hmrTopLevelAwait: false }),
       // 自动导入配置 https://github.com/sxzz/element-plus-best-practices/blob/main/vite.config.ts
       AutoImport({
