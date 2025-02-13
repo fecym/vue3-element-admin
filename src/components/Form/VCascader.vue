@@ -23,6 +23,10 @@ import { computed } from "vue";
 const emit = defineEmits(["click"]);
 
 const props = defineProps({
+  vid: {
+    type: String,
+    default: "",
+  },
   label: {
     type: String,
     default: "",
@@ -45,9 +49,14 @@ const props = defineProps({
   },
 });
 
-const { value, errorMessage, handleBlur, setError } = useField(props.label, props.rules, {
-  initialValue: props.modelValue,
-});
+const { value, errorMessage, handleBlur, setError } = useField(
+  props.vid || props.label,
+  props.rules,
+  {
+    initialValue: props.modelValue,
+    label: props.label,
+  }
+);
 
 const isRequired = useRequired(props.rules);
 

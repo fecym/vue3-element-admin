@@ -15,6 +15,10 @@ import { useField } from "vee-validate";
 import { useRequired } from "@/composables/useForm.js";
 
 const props = defineProps({
+  vid: {
+    type: String,
+    default: "",
+  },
   label: {
     type: String,
     default: "",
@@ -33,12 +37,17 @@ const validateRate = value => {
   return true;
 };
 
-const { value, errorMessage, handleBlur, setErrors } = useField(props.label, validateRate, {
-  validateOnValueUpdate: false,
-  validateOnMount: false,
-  validateOnChange: true,
-  validateOnBlur: true,
-});
+const { value, errorMessage, handleBlur, setErrors } = useField(
+  props.vid || props.label,
+  validateRate,
+  {
+    validateOnValueUpdate: false,
+    validateOnMount: false,
+    validateOnChange: true,
+    validateOnBlur: true,
+    label: props.label,
+  }
+);
 
 const isRequired = useRequired(props.rules);
 

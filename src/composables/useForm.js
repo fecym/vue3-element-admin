@@ -19,3 +19,8 @@ export function useRequired(rules) {
     return false;
   });
 }
+
+export function useLabel(props) {
+  if (props.hideLabel) return "";
+  return props.label + ":";
+}
