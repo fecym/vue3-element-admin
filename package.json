@@ -97,6 +97,7 @@
     "unplugin-vue-components": "^0.27.5",
     "vite": "^6.0.7",
     "vite-bundle-analyzer": "^0.16.1",
+    "vite-plugin-compression": "^0.5.1",
     "vite-plugin-legacy-swc": "^1.2.3",
     "vite-plugin-svg-icons": "^2.0.1",
     "vue-eslint-parser": "^9.4.3"

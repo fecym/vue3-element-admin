@@ -1,5 +1,6 @@
 import vue from "@vitejs/plugin-vue";
 import { loadEnv, defineConfig } from "vite";
+import compression from "vite-plugin-compression";
 
 import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
@@ -104,6 +105,14 @@ export default defineConfig(({ mode }) => {
       }),
       ElementPlus({}),
       viteBuildInfo(),
+      compression({
+        verbose: true, // 是否在控制台输出压缩结果
+        disable: false, // 是否禁用
+        threshold: 10240, // 体积大于阈值会被压缩，单位 b，默认 10240 (10KB)
+        algorithm: "gzip", // 压缩算法，可选 ['gzip','brotliCompress' ,'deflate','deflateRaw']
+        ext: ".gz", // 生成的压缩包后缀
+        deleteOriginFile: false, // 是否删除原文件
+      }),
       env.VITE_ANALYZE === "true" && analyzer(),
     ],
     // 构建配置
