@@ -58,56 +58,6 @@ export default {
       ],
     },
     {
-      id: 22,
-      name: "组件封装",
-      router: "/component",
-      icon: "menu",
-      children: [
-        {
-          id: 23,
-          name: "增删改查",
-          router: "/component/curd",
-          icon: "",
-          children: [],
-        },
-        {
-          id: 24,
-          name: "列表选择器",
-          router: "/component/table-select",
-          icon: "",
-          children: [],
-        },
-        {
-          id: 25,
-          name: "富文本编辑器",
-          router: "/component/wang-editor",
-          icon: "",
-          children: [],
-        },
-        {
-          id: 26,
-          name: "图片上传",
-          router: "/component/upload",
-          icon: "",
-          children: [],
-        },
-        {
-          id: 27,
-          name: "字典组件",
-          router: "/component/dict-demo",
-          icon: "",
-          children: [],
-        },
-        {
-          id: 28,
-          name: "图标选择器",
-          router: "/component/icon-selector",
-          icon: "",
-          children: [],
-        },
-      ],
-    },
-    {
       id: 32,
       name: "功能演示",
       router: "/function",
@@ -118,6 +68,13 @@ export default {
           name: "Icons",
           router: "/function/icon-demo",
           icon: "el-icon-Notification",
+          children: [],
+        },
+        {
+          id: 28,
+          name: "图标选择器",
+          router: "/demo/icon-selector",
+          icon: "",
           children: [],
         },
         {
@@ -157,10 +114,19 @@ export default {
           icon: "el-icon-Location",
           children: null,
         },
+        // http://183.131.86.175:9090/wui/index.html?ssoToken=818E426288C2A6AB9480C1823A5F67378F6BABCBC5732B4D215450DABFAE88C175599A9CE35A9FE0B4589386CEE2F77826AA00B6089D140A61B9726AB8A95C8E#/main/cube/search?customid=157&menuIds=-125,-163&menuPathIds=-125,-163&hideHeader=true&_key=vvhecf
+        {
+          id: 38,
+          name: "泛微",
+          router:
+            "http://183.131.86.175:9090/wui/index.html?ssoToken=818E426288C2A6AB9480C1823A5F67378F6BABCBC5732B4D215450DABFAE88C175599A9CE35A9FE0B4589386CEE2F77826AA00B6089D140A61B9726AB8A95C8E#/main/cube/search?customid=157&menuIds=-125,-163&menuPathIds=-125,-163&hideHeader=true&_key=vvhecf",
+          icon: "el-icon-Location",
+          children: null,
+        },
         {
           id: 15,
-          name: "iframe 嵌套",
-          router: "/doc/internal-doc",
+          name: "博客",
+          router: "https://chengyuming.cn",
           icon: "document",
           children: null,
         },

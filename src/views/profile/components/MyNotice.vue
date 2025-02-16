@@ -66,12 +66,13 @@
         </el-table-column>
       </el-table>
 
-      <pagination
+      <el-pagination
         v-if="total > 0"
-        v-model:total="total"
-        v-model:page="queryParams.pageNum"
-        v-model:limit="queryParams.pageSize"
-        @pagination="handleQuery()"
+        v-model:page-size="queryParams.pageSize"
+        v-model:current-page="queryParams.pageNum"
+        :total="total"
+        @size-change="handleQuery"
+        @current-change="handleQuery"
       />
     </el-card>
 
@@ -89,7 +90,6 @@ defineOptions({
 
 import NoticeAPI from "@/api/system/notice.js";
 import DictLabel from "@/components/Dict/DictLabel.vue";
-import Pagination from "@/components/Pagination.vue";
 // import NoticeDetail from "@/views/profile/components/NoticeDetail.vue";
 import { ElForm } from "element-plus";
 

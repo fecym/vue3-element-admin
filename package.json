@@ -46,8 +46,6 @@
     "@vee-validate/i18n": "^4.15.0",
     "@vee-validate/rules": "^4.15.0",
     "@vueuse/core": "^10.11.1",
-    "@wangeditor-next/editor": "^5.6.29",
-    "@wangeditor-next/editor-for-vue": "^5.1.14",
     "axios": "^1.7.9",
     "boxen": "^8.0.1",
     "dayjs": "^1.11.13",

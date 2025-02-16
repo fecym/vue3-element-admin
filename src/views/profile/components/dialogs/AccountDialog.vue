@@ -21,8 +21,7 @@
 import { ref, watch } from "vue";
 import UserAPI from "@/api/system/user";
 import { ElMessage } from "element-plus";
-import Dict from "@/views/system/dict/index.vue";
-
+import Dict from "@/components/Dict/index.vue";
 const props = defineProps({
   modelValue: Boolean,
   userInfo: {

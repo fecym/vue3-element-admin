@@ -5,10 +5,10 @@
         v-if="item.redirect === 'noredirect' || index === breadcrumbs.length - 1"
         class="color-gray-400"
       >
-        {{ translateRouteTitle(item.meta.title) }}
+        {{ item.meta.title }}
       </span>
       <a v-else @click.prevent="handleLink(item)">
-        {{ translateRouteTitle(item.meta.title) }}
+        {{ item.meta.title }}
       </a>
     </el-breadcrumb-item>
   </el-breadcrumb>
@@ -18,7 +18,6 @@
 import { useRoute } from "vue-router";
 import { compile } from "path-to-regexp";
 import router from "@/router/index.js";
-import { translateRouteTitle } from "@/utils/i18n.js";
 
 const currentRoute = useRoute();
 const pathCompile = path => {

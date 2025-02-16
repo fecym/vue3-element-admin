@@ -10,7 +10,7 @@
         @click.middle="!isAffix(tag) ? closeSelectedTag(tag) : ''"
         @contextmenu.prevent="openContentMenu(tag, $event)"
       >
-        {{ translateRouteTitle(tag.title) }}
+        {{ tag.title }}
         <el-icon
           v-if="!isAffix(tag)"
           class="tag-close-icon"
@@ -59,7 +59,6 @@
 import { ref, computed, watch, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { resolve } from "path-browserify";
-import { translateRouteTitle } from "@/utils/i18n";
 import { usePermissionStore, useTagsViewStore, useSettingsStore, useAppStore } from "@/store";
 import { storeToRefs } from "pinia";
 import SvgIcon from "@/auto-components/SvgIcon.vue";

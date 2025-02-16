@@ -19,7 +19,7 @@
           </template>
           <span v-if="route.path === '/'">首页</span>
           <span v-else-if="route.title" class="ml-1">
-            {{ translateRouteTitle(route.title) }}
+            {{ route.title }}
           </span>
         </template>
       </el-menu-item>
@@ -31,7 +31,6 @@
 import { ref, computed, onMounted } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import { usePermissionStore, useAppStore } from "@/store";
-import { translateRouteTitle } from "@/utils/i18n";
 import variables from "@/styles/variables.module.scss";
 import { cloneDeep } from "lodash-es";
 import SvgIcon from "@/auto-components/SvgIcon.vue";
