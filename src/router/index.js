@@ -67,6 +67,12 @@ export const constantRoutes = [
     component: () => import("@/views/micro-app/setting.vue"),
     meta: { title: "配置", icon: "config", hidden: true, hiddenLayout: false },
   },
+  {
+    path: "/link-jump",
+    name: "LinkJump",
+    component: () => import("@/views/micro-app/nested-iframe.vue"),
+    meta: { title: "外链访问", icon: "config", hidden: true, hiddenLayout: false },
+  },
 ];
 
 const microApps = getMicroAppsMap();

@@ -2,15 +2,15 @@
   <div v-if="!item.meta || !item.meta.hidden">
     <!--【叶子节点】显示叶子节点或唯一子节点且父节点未配置始终显示 -->
     <template v-if="!item.children?.length">
-      <AppLink
-        :to="{
-          path: resolvePath(item.router),
-          query: item.meta?.params,
-        }"
-      >
+      <!--        :to="{-->
+      <!--          path: resolvePath(item.router),-->
+      <!--          query: item.meta?.params,-->
+      <!--        }"-->
+      <AppLink>
         <el-menu-item
           :index="resolvePath(item.router)"
           :class="{ 'submenu-title-noDropdown': !isNest }"
+          @click="onLinkJump(item)"
         >
           <SidebarMenuItemTitle
             :icon="item.icon || item.meta?.icon"
@@ -45,6 +45,7 @@ import path from "path-browserify";
 import { isExternal } from "@/utils";
 import AppLink from "@/auto-components/AppLink.vue";
 import SidebarMenuItemTitle from "@/layout/components/Sidebar/components/SidebarMenuItemTitle.vue";
+import { useLinkJump } from "@/composables/useLinkJump.js";
 
 defineOptions({
   name: "SidebarMenuItem",
@@ -87,6 +88,12 @@ function resolvePath(routePath) {
 
   // 拼接父路径和当前路径
   return path.resolve(props.basePath, routePath);
+}
+
+function onLinkJump(row) {
+  const url = resolvePath(row.router);
+  const { handleLinkJump } = useLinkJump();
+  handleLinkJump(url);
 }
 </script>
 

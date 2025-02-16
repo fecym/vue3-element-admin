@@ -15,7 +15,7 @@ import { isExternal } from "@/utils/index.js";
 const props = defineProps({
   to: {
     type: Object,
-    required: true,
+    required: false,
   },
 });
 
@@ -23,16 +23,19 @@ const isExternalLink = computed(() => {
   return isExternal(props.to.path || "");
 });
 
-const linkType = computed(() => (isExternalLink.value ? "a" : "router-link"));
+// const linkType = computed(() => (isExternalLink.value ? "a" : "router-link"));
+const linkType = "div";
 
 const linkProps = to => {
-  if (isExternalLink.value) {
-    return {
-      href: to.path,
-      target: "_blank",
-      rel: "noopener noreferrer",
-    };
+  // if (isExternalLink.value) {
+  //   return {
+  //     href: to.path,
+  //     target: "_blank",
+  //     rel: "noopener noreferrer",
+  //   };
+  // }
+  // return { to: to };
+  {
   }
-  return { to: to };
 };
 </script>

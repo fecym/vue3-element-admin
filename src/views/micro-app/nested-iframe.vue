@@ -1,8 +1,25 @@
 <template>
   <div class="app-container">
-    <iframe src="https://chengyuming.cn" frameborder="0" />
+    <iframe :key="currentUrl" :src="currentUrl" frameborder="0" />
   </div>
 </template>
+
+<script setup>
+import { ref, watch } from "vue";
+import { useRoute } from "vue-router";
+
+const route = useRoute();
+const currentUrl = ref(route.query.url || "");
+
+watch(
+  () => route.query.url,
+  newUrl => {
+    if (newUrl) {
+      currentUrl.value = newUrl;
+    }
+  }
+);
+</script>
 <style lang="scss" scoped>
 /** 关闭tag标签  */
 .app-container {
