@@ -9,15 +9,16 @@ import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 const route = useRoute();
-const currentUrl = ref(route.query.url || "");
+const currentUrl = ref("");
 
 watch(
   () => route.query.url,
   newUrl => {
     if (newUrl) {
-      currentUrl.value = newUrl;
+      currentUrl.value = decodeURIComponent(newUrl);
     }
-  }
+  },
+  { immediate: true }
 );
 </script>
 <style lang="scss" scoped>

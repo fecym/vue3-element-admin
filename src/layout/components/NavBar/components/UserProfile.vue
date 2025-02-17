@@ -50,6 +50,7 @@ function logout() {
         tagsViewStore.delAllViews();
       })
       .then(() => {
+        user.logout();
         router.push(`/login?redirect=${route.fullPath}`);
       });
   });

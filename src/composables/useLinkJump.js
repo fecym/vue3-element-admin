@@ -11,6 +11,7 @@ export function useLinkJump() {
     if (!url) return;
 
     if (isExternalLink(url)) {
+      url = encodeURIComponent(url);
       router.push({ path: "/link-jump", query: { url } });
     } else {
       router.push(url);

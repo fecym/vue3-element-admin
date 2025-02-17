@@ -91,6 +91,20 @@ export default {
           icon: "",
           children: [],
         },
+        {
+          id: 350,
+          name: "微前端配置",
+          router: "/micro-setting",
+          icon: "",
+          children: null,
+        },
+        {
+          id: 360,
+          name: "菜单配置",
+          router: "/menu-setting",
+          icon: "",
+          children: null,
+        },
       ],
     },
     {
@@ -114,12 +128,19 @@ export default {
           icon: "el-icon-Location",
           children: null,
         },
-        // http://183.131.86.175:9090/wui/index.html?ssoToken=818E426288C2A6AB9480C1823A5F67378F6BABCBC5732B4D215450DABFAE88C175599A9CE35A9FE0B4589386CEE2F77826AA00B6089D140A61B9726AB8A95C8E#/main/cube/search?customid=157&menuIds=-125,-163&menuPathIds=-125,-163&hideHeader=true&_key=vvhecf
+        {
+          id: 380,
+          name: "平湖",
+          // router: "/map/map-line",
+          router: "http://183.131.86.175",
+          icon: "el-icon-Location",
+          children: null,
+        },
         {
           id: 38,
           name: "泛微",
           router:
-            "http://183.131.86.175:9090/wui/index.html?ssoToken=818E426288C2A6AB9480C1823A5F67378F6BABCBC5732B4D215450DABFAE88C175599A9CE35A9FE0B4589386CEE2F77826AA00B6089D140A61B9726AB8A95C8E#/main/cube/search?customid=157&menuIds=-125,-163&menuPathIds=-125,-163&hideHeader=true&_key=vvhecf",
+            "http://183.131.86.175:9090/wui/index.html?ssoToken=C3C317DA18E847E18FC96F2F243B1398AAAF19029AF5283CD881B213EE5480C675599A9CE35A9FE0B4589386CEE2F77826AA00B6089D140A61B9726AB8A95C8E#/main/cube/search?customid=157&menuIds=-125,-163&menuPathIds=-125,-163&hideHeader=true&_key=vvhecf",
           icon: "el-icon-Location",
           children: null,
         },

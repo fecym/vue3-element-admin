@@ -90,9 +90,15 @@ export class User {
     sessionStorage.removeItem(REFRESH_TOKEN_KEY);
   }
 
+  clearAll() {
+    sessionStorage.clear();
+    localStorage.clear();
+  }
+
   logout() {
-    this.clear();
-    location.reload();
+    // this.clear();
+    this.clearAll();
+    // location.reload();
   }
 }
 

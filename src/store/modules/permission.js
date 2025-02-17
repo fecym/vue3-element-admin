@@ -21,20 +21,31 @@ export const usePermissionStore = defineStore("permission", () => {
    */
   function generateRoutes() {
     const { resolve, promise, reject } = Promise.withResolvers();
-    MenuAPI.getRoutes()
-      .then(data => {
-        treeForEach(data, node => {
-          node.title ||= node.name;
-          node.path ||= node.router;
-        });
-        const dynamicRoutes = generateRoutesFromBackend(data);
-        menuList.value = data || [];
-        routes.value = constantRoutes.concat(dynamicRoutes);
-        addRouteRecursively(dynamicRoutes);
-        isRoutesLoaded.value = true;
-        resolve();
-      })
-      .catch(reject);
+    const menuListStore = user.getMenu();
+
+    const formatMenu = data => {
+      const dynamicRoutes = generateRoutesFromBackend(data);
+      menuList.value = data || [];
+      routes.value = constantRoutes.concat(dynamicRoutes);
+      addRouteRecursively(dynamicRoutes);
+      isRoutesLoaded.value = true;
+    };
+    if (menuListStore) {
+      formatMenu(menuListStore);
+      resolve();
+    } else {
+      MenuAPI.getRoutes()
+        .then(data => {
+          treeForEach(data, node => {
+            node.title ||= node.name;
+            node.path ||= node.router;
+          });
+          formatMenu(data);
+          resolve();
+        })
+        .catch(reject);
+    }
+
     return promise;
   }
 
@@ -75,7 +86,7 @@ export const usePermissionStore = defineStore("permission", () => {
   };
 });
 
-function generateRoutesFromBackend(menuList) {
+function generateRoutesFromBackend(menuList, setUser = true) {
   const filterRoutes = treeFilter(cloneDeep(moduleRoutes), route => {
     return treeFind(menuList, node => {
       const isMatch = node.router === route.path;
@@ -88,7 +99,7 @@ function generateRoutesFromBackend(menuList) {
       return isMatch;
     });
   });
-  user.setMenu(menuList);
+  setUser && user.setMenu(menuList);
   return filterRoutes;
 }
 

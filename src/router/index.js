@@ -65,7 +65,13 @@ export const constantRoutes = [
     path: "/micro-setting",
     name: "MicroAppSetting",
     component: () => import("@/views/micro-app/setting.vue"),
-    meta: { title: "配置", icon: "config", hidden: true, hiddenLayout: false },
+    meta: { title: "子应用配置", icon: "config", hidden: true, hiddenLayout: false },
+  },
+  {
+    path: "/menu-setting",
+    name: "MenuSetting",
+    component: () => import("@/views/demo/menu-conf.vue"),
+    meta: { title: "菜单配置", icon: "config", hidden: true, hiddenLayout: false },
   },
   {
     path: "/link-jump",

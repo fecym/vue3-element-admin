@@ -91,7 +91,7 @@ onMounted(() => {
 .micro-app-config {
   max-width: 1000px;
   padding: 24px;
-  margin: 0 auto;
+  margin: 48px auto 0;
   background-color: #fff;
 }
 
@@ -146,7 +146,6 @@ onMounted(() => {
 .micro-app-config {
   max-width: 1000px;
   padding: 32px;
-  margin: 0 auto;
   background-color: #fff;
 }
 
