@@ -4,8 +4,6 @@ import { requireAll } from "@/router/requireAll.js";
 const moduleRoutes = requireAll();
 export { moduleRoutes };
 
-import { getMicroAppsMap } from "@/utils/microApp.js";
-
 // 静态路由
 //  meta 属性: hidden: true 隐藏左侧内具体内容, hiddenLayout: true 该页面是否需要隐藏左侧菜单
 export const constantRoutes = [
@@ -62,12 +60,6 @@ export const constantRoutes = [
     meta: { title: "我的通知", icon: "user", hidden: true, hiddenLayout: false },
   },
   {
-    path: "/micro-setting",
-    name: "MicroAppSetting",
-    component: () => import("@/views/micro-app/setting.vue"),
-    meta: { title: "子应用配置", icon: "config", hidden: true, hiddenLayout: false },
-  },
-  {
     path: "/menu-setting",
     name: "MenuSetting",
     component: () => import("@/views/demo/menu-conf.vue"),
@@ -80,25 +72,6 @@ export const constantRoutes = [
     meta: { title: "外链访问", icon: "config", hidden: true, hiddenLayout: false },
   },
 ];
-
-const microApps = getMicroAppsMap();
-
-for (const key in microApps) {
-  constantRoutes.push({
-    path: `/${key}/:params*`,
-    component: () => import("@/views/micro-app/wrapper.vue"),
-    props: true,
-    name: `microApp-${key}`,
-    meta: {
-      title: key,
-      microAppName: key,
-      icon: "el-icon-s-grid",
-      hidden: false,
-      hiddenLayout: false,
-      keepAlive: true,
-    },
-  });
-}
 
 /**
  * 创建路由

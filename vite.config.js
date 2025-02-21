@@ -60,13 +60,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     plugins: [
-      vue({
-        template: {
-          compilerOptions: {
-            isCustomElement: tag => /^micro-app/.test(tag),
-          },
-        },
-      }),
+      vue(),
       UnoCSS({ hmrTopLevelAwait: false }),
       // 自动导入配置 https://github.com/sxzz/element-plus-best-practices/blob/main/vite.config.ts
       AutoImport({
