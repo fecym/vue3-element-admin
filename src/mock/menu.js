@@ -93,10 +93,10 @@ export default {
         },
         {
           id: 350,
-          name: "微前端配置",
-          router: "/micro-setting",
+          name: "富文本编辑器",
+          router: "/demo/editor",
           icon: "",
-          children: null,
+          children: [],
         },
         {
           id: 360,

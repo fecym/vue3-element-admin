@@ -51,4 +51,17 @@ export default [
       params: null,
     },
   },
+  {
+    path: "/demo/editor",
+    component: () => import("@/views/demo/wang-editor.vue"),
+    name: "富文本编辑器",
+    meta: {
+      title: "Websocket",
+      icon: "",
+      hidden: false,
+      keepAlive: true,
+      alwaysShow: false,
+      params: null,
+    },
+  },
 ];
