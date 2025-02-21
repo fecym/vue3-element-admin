@@ -13,13 +13,13 @@ const defaultSettings = {
   // 系统版本
   version: pkg.version,
   // 是否显示设置
-  showSettings: false,
+  showSettings: true,
   // 是否显示标签视图
-  tagsView: false,
+  tagsView: true,
   // 是否显示侧边栏Logo
   sidebarLogo: true,
-  // 布局方式，默认为顶部布局, 不可修改
-  layout: LayoutEnum.TOP,
+  // 布局方式，默认为左侧布局
+  layout: LayoutEnum.LEFT,
   // 主题，根据操作系统的色彩方案自动选择
   theme: mediaQueryList.matches ? ThemeEnum.DARK : ThemeEnum.LIGHT,
   // 组件大小 default | medium | small | large
