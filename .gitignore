@@ -4,6 +4,10 @@ dist
 dist-ssr
 *.local
 .history
+.vscode
+src/utils/svg_icons.js
+
+docs
 
 # Editor directories and files
 .idea
@@ -18,3 +22,4 @@ package-lock.json
 
 scan-script
 dist*
+

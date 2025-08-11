@@ -40,53 +40,12 @@ import { ref } from "vue";
 import SvgIcon from "@/auto-components/SvgIcon.vue";
 import * as ElementPlusIconsVue from "@element-plus/icons-vue";
 import CopyButton from "@/components/CopyButton.vue";
+import svg_icons from "@/utils/svg_icons.js";
 
 defineOptions({
   name: "Icons",
   inheritAttrs: false,
 });
-
-const svg_icons = [
-  "api",
-  "cascader",
-  "client",
-  "close",
-  "close_all",
-  "close_left",
-  "close_other",
-  "close_right",
-  "dict",
-  "document",
-  "download",
-  "drag",
-  "edit",
-  "exit-fullscreen",
-  "eye-open",
-  "eye",
-  "fullscreen",
-  "github",
-  "homepage",
-  "language",
-  "link",
-  "menu",
-  "message",
-  "money",
-  "monitor",
-  "order",
-  "password",
-  "peoples",
-  "perm",
-  "publish",
-  "role",
-  "security",
-  "size",
-  "skill",
-  "system",
-  "tree",
-  "user",
-  "uv",
-  "verify-code",
-];
 
 const icons = ref(ElementPlusIconsVue);
 
