@@ -6,7 +6,7 @@
   <svg-icon v-else-if="icon" :icon-class="icon" />
   <svg-icon v-else icon-class="menu" />
   <!-- 菜单标题 -->
-  <span v-if="title" class="ml-1">{{ title }}</span>
+  <span v-if="title" class="ml-3">{{ title }}</span>
 </template>
 
 <script setup>

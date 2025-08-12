@@ -9,7 +9,7 @@ const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
 const defaultSettings = {
   // 系统Title
-  title: pkg.name,
+  title: "TCM 发布平台",
   // 系统版本
   version: pkg.version,
   // 是否显示设置

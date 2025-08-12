@@ -1,49 +1,49 @@
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   $colors: (
     "primary": (
-      "base": #4080ff,
+      "base": #3b82f6,
     ),
     "success": (
-      "base": #23c343,
+      "base": #10b981,
     ),
     "warning": (
-      "base": #ff9a2e,
+      "base": #f59e0b,
     ),
     "danger": (
-      "base": #f76560,
+      "base": #ef4444,
     ),
     "info": (
-      "base": #a9aeb8,
+      "base": #6b7280,
     ),
   ),
 
   $bg-color: (
-    "page": #f5f8fd,
+    "page": #f8fafc,
   )
 );
 
 /** 全局SCSS变量 */
 
 :root {
-  --menu-background: #304156;
-  --menu-text: #bfcbd9;
+  --menu-background: #1e293b;
+  --menu-text: #cbd5e1;
   --menu-active-text: var(--el-menu-active-color);
-  --menu-hover: #263445;
-  --sidebar-logo-background: #2d3748;
+  --menu-hover: #334155;
+  --sidebar-logo-background: #0f172a;
 
   // 修复表格 fixed 列被选中后由于透明色导致叠字的 bug
   .el-table {
-    --el-table-current-row-bg-color: rgb(235 243 250);
+    --el-table-current-row-bg-color: rgb(239 246 255);
   }
 }
 
 /** 暗黑主题 */
 html.dark {
-  --menu-background: var(--el-bg-color-overlay);
-  --menu-text: #fff;
+  --menu-background: #0f172a;
+  --menu-text: #e2e8f0;
   --menu-active-text: var(--el-menu-active-color);
-  --menu-hover: rgb(0 0 0 / 20%);
-  --sidebar-logo-background: rgb(0 0 0 / 20%);
+  --menu-hover: #1e293b;
+  --sidebar-logo-background: #020617;
 }
 
 $menu-background: var(--menu-background); // 菜单背景色

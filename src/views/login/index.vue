@@ -82,23 +82,6 @@
           </el-form-item>
         </el-tooltip>
 
-        <!-- 验证码 -->
-        <!--        <el-form-item prop="captchaCode">-->
-        <!--          <div class="input-wrapper">-->
-        <!--            <svg-icon icon-class="captcha" class="mx-2" />-->
-        <!--            <el-input-->
-        <!--              v-model="loginFormData.captchaCode"-->
-        <!--              auto-complete="off"-->
-        <!--              size="large"-->
-        <!--              class="flex-1"-->
-        <!--              placeholder="验证码"-->
-        <!--              @keyup.enter="handleLoginSubmit"-->
-        <!--            />-->
-
-        <!--            <el-image :src="captchaBase64" class="captcha-img" @click="getCaptcha" />-->
-        <!--          </div>-->
-        <!--        </el-form-item>-->
-
         <div class="flex-x-between w-full py-1">
           <el-checkbox>记住我</el-checkbox>
 

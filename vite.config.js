@@ -50,6 +50,7 @@ export default defineConfig(({ mode }) => {
       host: "0.0.0.0",
       port: +env.VITE_APP_PORT,
       open: true,
+      historyApiFallback: true,
       proxy: {
         // 代理 /api 的请求
         // [env.VITE_APP_API_PATH]: {
