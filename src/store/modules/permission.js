@@ -6,6 +6,7 @@ import router from "@/router";
 import MenuAPI from "@/api/system/menu";
 import { treeFilter, treeFind, treeForEach } from "@/utils/tree.js";
 import { cloneDeep } from "lodash-es";
+import user from "@/utils/user";
 
 export const usePermissionStore = defineStore("permission", () => {
   // 所有路由，包括静态和动态路由
@@ -15,6 +16,7 @@ export const usePermissionStore = defineStore("permission", () => {
   const mixLeftMenus = ref([]);
   // 路由是否已加载
   const isRoutesLoaded = ref(false);
+  const routerMap = ref({});
 
   /**
    * 生成动态路由
@@ -28,6 +30,9 @@ export const usePermissionStore = defineStore("permission", () => {
       menuList.value = data || [];
       routes.value = constantRoutes.concat(dynamicRoutes);
       addRouteRecursively(dynamicRoutes);
+      router.getRoutes().forEach(route => {
+        routerMap.value[route.path] = route;
+      });
       isRoutesLoaded.value = true;
     };
     if (menuListStore) {
@@ -83,6 +88,7 @@ export const usePermissionStore = defineStore("permission", () => {
     setMixLeftMenus,
     isRoutesLoaded,
     resetRouter,
+    routerMap,
   };
 });
 
@@ -105,15 +111,21 @@ function generateRoutesFromBackend(menuList, setUser = true) {
 
 const addRouteRecursively = (routes, parent = null) => {
   routes.forEach(route => {
-    if (!parent) {
-      if (!router.hasRoute(route.name)) router.addRoute(route);
-    } else {
-      if (!router.hasRoute(route.name)) {
-        router.addRoute(parent.name, route);
+    try {
+      if (!parent) {
+        if (!router.hasRoute(route.name)) {
+          router.addRoute(route);
+        }
+      } else {
+        if (!router.hasRoute(route.name)) {
+          router.addRoute(parent.name, route);
+        }
       }
-    }
-    if (route.children?.length) {
-      addRouteRecursively(route.children, route);
+      if (route.children?.length) {
+        addRouteRecursively(route.children, route);
+      }
+    } catch (error) {
+      console.warn(`Failed to add route: ${route.name}`, error);
     }
   });
 };

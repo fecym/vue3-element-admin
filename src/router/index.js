@@ -1,6 +1,6 @@
 import { createRouter, createWebHashHistory, createWebHistory } from "vue-router";
 import { requireAll } from "@/router/requireAll.js";
-
+const NotFound = () => import("@/views/error/404.vue");
 const moduleRoutes = requireAll();
 export { moduleRoutes };
 
@@ -44,7 +44,7 @@ export const constantRoutes = [
   },
   {
     path: "/404",
-    component: () => import("@/views/error/404.vue"),
+    component: NotFound,
     meta: { hidden: true, hiddenLayout: true },
   },
   {
@@ -70,6 +70,11 @@ export const constantRoutes = [
     name: "LinkJump",
     component: () => import("@/views/micro-app/nested-iframe.vue"),
     meta: { title: "外链访问", icon: "config", hidden: true, hiddenLayout: false },
+  },
+  {
+    path: "/:pathMatch(.*)*",
+    component: NotFound,
+    meta: { hidden: true, hiddenLayout: true },
   },
 ];
 

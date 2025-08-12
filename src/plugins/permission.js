@@ -9,7 +9,6 @@ export function setupPermission() {
 
   router.beforeEach(async (to, from, next) => {
     NProgress.start();
-
     const isLogin = !!user.getToken(); // 判断是否登录
     if (isLogin) {
       if (to.path === "/login") {
@@ -17,31 +16,33 @@ export function setupPermission() {
         next({ path: "/" });
       } else {
         const permissionStore = usePermissionStore();
-        // 判断路由是否加载完成
-        if (permissionStore.isRoutesLoaded) {
-          if (to.matched.length === 0) {
-            // 路由未匹配，跳转到404
-            next("/404");
-          } else {
-            // 动态设置页面标题
-            const title = to.params.title || to.query.title;
-            if (title) {
-              to.meta.title = title;
-            }
-            next();
-          }
-        } else {
+        // 如果路由还没加载，尝试加载
+        if (!permissionStore.isRoutesLoaded) {
           try {
-            // 生成动态路由
             await permissionStore.generateRoutes();
-            next({ ...to, replace: true });
+            // 路由加载完成后，重新跳转到目标路由，让 Vue Router 重新解析
+            next({ path: to.fullPath, replace: true });
+            return;
           } catch (error) {
-            console.error(error);
-            // 路由加载失败，重置 token 并重定向到登录页
+            console.error("路由加载失败:", error);
             await useUserStore().clearUserData();
             redirectToLogin(to, next);
             NProgress.done();
+            return;
           }
+        }
+
+        // 路由已加载，正常处理
+        if (to.matched.length === 0) {
+          // 路由未匹配，跳转到404
+          next("/404");
+        } else {
+          // 动态设置页面标题
+          const title = to.params.title || to.query.title;
+          if (title) {
+            to.meta.title = title;
+          }
+          next();
         }
       }
     } else {
