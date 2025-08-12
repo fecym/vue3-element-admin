@@ -61,7 +61,7 @@
 
 <script setup>
 import { ref, reactive } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 import UserInfo from "./components/UserInfo.vue";
 import UserDetails from "./components/UserDetails.vue";
 import RecentActivities from "./components/RecentActivities.vue";

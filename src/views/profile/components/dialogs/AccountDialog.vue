@@ -19,7 +19,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 import { ElMessage } from "element-plus";
 import Dict from "@/components/Dict/index.vue";
 const props = defineProps({

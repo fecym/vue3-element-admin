@@ -55,7 +55,7 @@
               placeholder="用户名"
               name="username"
               size="large"
-              class="h-[48px]"
+              class="h-[48px] pr-2"
             />
           </div>
         </el-form-item>
@@ -207,9 +207,11 @@ function handleLoginSubmit() {
           await usePermissionStore().generateRoutes();
           // 跳转到登录前的页面
           const { path, queryParams } = parseRedirect();
+          console.log(path, "??");
           router.push({ path: path, query: queryParams });
         })
-        .catch(() => {
+        .catch(err => {
+          console.log(err, "???");
           getCaptcha();
         })
         .finally(() => {

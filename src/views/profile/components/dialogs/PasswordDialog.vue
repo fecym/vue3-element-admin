@@ -37,7 +37,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 
 const props = defineProps({
   modelValue: Boolean,
