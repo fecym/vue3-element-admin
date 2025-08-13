@@ -10,6 +10,17 @@ Object.keys(rules).forEach(rule => {
   }
 });
 
+// 自定义decimal验证器，用于验证小数
+defineRule("decimal", value => {
+  if (!value) {
+    return true;
+  }
+
+  // 验证是否为有效的小数格式
+  const decimalRegex = /^-?\d+(\.\d+)?$/;
+  return decimalRegex.test(String(value)) || "请输入有效的数字（整数或小数）";
+});
+
 // 配置验证
 configure({
   validateOnInput: true,
