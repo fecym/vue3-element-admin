@@ -13,6 +13,7 @@
 <script setup>
 import { useField } from "vee-validate";
 import { useRequired } from "@/composables/useForm.js";
+import { watch } from "vue";
 
 const props = defineProps({
   vid: {
@@ -29,6 +30,11 @@ const props = defineProps({
   },
 });
 
+const modelValue = defineModel({
+  type: Number,
+  default: 0,
+});
+
 // 自定义验证规则
 const validateRate = value => {
   if (props.rules === "required" && (!value || value === 0)) {
@@ -41,6 +47,7 @@ const { value, errorMessage, handleBlur, setErrors } = useField(
   props.vid || props.label,
   validateRate,
   {
+    initialValue: modelValue.value,
     validateOnValueUpdate: false,
     validateOnMount: false,
     validateOnChange: true,
@@ -48,6 +55,19 @@ const { value, errorMessage, handleBlur, setErrors } = useField(
     label: props.label,
   }
 );
+
+// 双向同步 modelValue 和 useField 的 value
+watch(modelValue, newVal => {
+  if (newVal !== value.value) {
+    value.value = newVal;
+  }
+});
+
+watch(value, newVal => {
+  if (newVal !== modelValue.value) {
+    modelValue.value = newVal;
+  }
+});
 
 const isRequired = useRequired(props.rules);
 

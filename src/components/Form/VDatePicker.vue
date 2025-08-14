@@ -16,7 +16,7 @@
 <script setup>
 import { useField } from "vee-validate";
 import { useRequired } from "@/composables/useForm.js";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import dayjs from "dayjs";
 
 const props = defineProps({
@@ -26,10 +26,6 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: "",
-  },
-  modelValue: {
-    type: [String, Array, Date],
     default: "",
   },
   editable: {
@@ -46,28 +42,46 @@ const props = defineProps({
   },
 });
 
+const modelValue = defineModel({
+  type: [String, Array, Date],
+  default: "",
+});
+
 const { value, errorMessage, handleBlur, setError } = useField(
   props.vid || props.label,
   props.rules,
   {
-    initialValue: props.modelValue,
+    initialValue: modelValue.value,
     label: props.label,
   }
 );
+
+// 双向同步 modelValue 和 useField 的 value
+watch(modelValue, newVal => {
+  if (newVal !== value.value) {
+    value.value = newVal;
+  }
+});
+
+watch(value, newVal => {
+  if (newVal !== modelValue.value) {
+    modelValue.value = newVal;
+  }
+});
 
 const isRequired = useRequired(props.rules);
 
 // 计算显示值
 const displayValue = computed(() => {
-  if (!props.modelValue) return "";
+  if (!modelValue.value) return "";
 
   // 处理日期范围
-  if (Array.isArray(props.modelValue)) {
-    return props.modelValue.map(date => dayjs(date).format(props.format)).join(" 至 ");
+  if (Array.isArray(modelValue.value)) {
+    return modelValue.value.map(date => dayjs(date).format(props.format)).join(" 至 ");
   }
 
   // 处理单个日期
-  return dayjs(props.modelValue).format(props.format);
+  return dayjs(modelValue.value).format(props.format);
 });
 
 defineExpose({

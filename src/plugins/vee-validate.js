@@ -21,6 +21,22 @@ defineRule("decimal", value => {
   return decimalRegex.test(String(value)) || "请输入有效的数字（整数或小数）";
 });
 
+// 自定义chineseEnglishNumber验证器，用于验证中英文和数字
+defineRule("chineseEnglishNumber", value => {
+  if (!value) {
+    return true;
+  }
+  return /^[\u4e00-\u9fa5a-zA-Z0-9]+$/.test(String(value)) || `${value}必须为中英文或数字`;
+});
+
+// 自定义phone验证器，用于验证手机号
+defineRule("phone", value => {
+  if (!value) {
+    return true; // 不做校验，交给 required 规则处理
+  }
+  return /^(1[3-9])\d{9}$/.test(String(value)) || `${value}不合法`;
+});
+
 // 配置验证
 configure({
   validateOnInput: true,
