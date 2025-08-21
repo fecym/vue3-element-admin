@@ -3,9 +3,8 @@ import { useStorage } from "@vueuse/core";
 import { store } from "@/store";
 import { usePermissionStoreHook } from "@/store/modules/permission";
 import { useDictStoreHook } from "@/store/modules/dict";
-
+import { getUser, login as loginFn } from "@/api/user.js";
 import AuthAPI from "@/api/auth";
-import UserAPI from "@/api/system/user";
 
 import user from "@/utils/user";
 
@@ -19,16 +18,16 @@ export const useUserStore = defineStore("user", () => {
    */
   function login(loginFormData) {
     const { promise, resolve, reject } = Promise.withResolvers();
-    AuthAPI.login(loginFormData)
+    const { username, password } = loginFormData;
+    loginFn({ username, password })
       .then(data => {
-        const { tokenType, accessToken, refreshToken } = data;
-        user.setToken(tokenType + " " + accessToken);
-        user.setRefreshToken(refreshToken);
+        console.log(data, "????");
+        if (!data) return reject();
+        user.setToken(data.token);
+        user.setRefreshToken(data.token);
         resolve();
       })
-      .catch(error => {
-        reject(error);
-      });
+      .catch(reject);
     return promise;
   }
 
@@ -38,19 +37,16 @@ export const useUserStore = defineStore("user", () => {
    */
   function getUserInfo() {
     const { promise, resolve, reject } = Promise.withResolvers();
-    UserAPI.getInfo()
+    getUser()
       .then(data => {
         if (!data) {
-          reject("Verification failed, please Login again.");
-          return;
+          return reject("Verification failed, please Login again.");
         }
         const info = Object.assign(userInfo.value, { ...data });
         user.setUserInfo(info);
-        resolve(data);
+        resolve(info);
       })
-      .catch(error => {
-        reject(error);
-      });
+      .catch(reject);
     return promise;
   }
 

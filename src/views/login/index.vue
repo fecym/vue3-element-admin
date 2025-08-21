@@ -29,14 +29,8 @@
                 <el-dropdown-item>
                   <el-tag>{{ defaultSettings.version }}</el-tag>
                 </el-dropdown-item>
-                <el-dropdown-item @click="setLoginCredentials('root', '123456')">
-                  超级管理员：root/123456
-                </el-dropdown-item>
-                <el-dropdown-item @click="setLoginCredentials('admin', '123456')">
-                  系统管理员：admin/123456
-                </el-dropdown-item>
-                <el-dropdown-item @click="setLoginCredentials('test', '123456')">
-                  测试小游客：test/123456
+                <el-dropdown-item @click="setLoginCredentials('test01', '000000')">
+                  测试账号：test01/123456
                 </el-dropdown-item>
               </el-dropdown-menu>
             </template>
@@ -55,7 +49,7 @@
               placeholder="用户名"
               name="username"
               size="large"
-              class="h-[48px]"
+              class="h-[48px] pr-2"
             />
           </div>
         </el-form-item>
@@ -84,8 +78,8 @@
 
         <div class="flex-x-between w-full py-1">
           <el-checkbox>记住我</el-checkbox>
-
-          <el-link type="primary" href="/forget-password">忘记密码</el-link>
+          <!--          href="/forget-password"-->
+          <el-link type="primary">忘记密码</el-link>
         </div>
 
         <!-- 登录按钮 -->
@@ -148,8 +142,8 @@ const isCapslock = ref(false); // 是否大写锁定
 const captchaBase64 = ref(); // 验证码图片Base64字符串
 
 const loginFormData = ref({
-  username: "admin",
-  password: "123456",
+  username: "",
+  password: "",
   captchaKey: "",
   captchaCode: "",
 });
@@ -207,9 +201,11 @@ function handleLoginSubmit() {
           await usePermissionStore().generateRoutes();
           // 跳转到登录前的页面
           const { path, queryParams } = parseRedirect();
+          console.log(path, "??");
           router.push({ path: path, query: queryParams });
         })
-        .catch(() => {
+        .catch(err => {
+          console.log(err, "???");
           getCaptcha();
         })
         .finally(() => {

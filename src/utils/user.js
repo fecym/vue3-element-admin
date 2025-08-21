@@ -2,6 +2,7 @@ const USER_KEY = "userInfo";
 const TOKEN_KEY = "Authorization";
 const REFRESH_TOKEN_KEY = "refresh_token";
 const MENU_KEY = "user-menu";
+import avatar from "@/assets/images/head.gif";
 
 /**
  * Safely set an item in sessionStorage.
@@ -44,6 +45,7 @@ function safeGetItem(key) {
 
 export class User {
   setUserInfo(data) {
+    data.avatar ??= avatar;
     safeSetItem(USER_KEY, data);
   }
 

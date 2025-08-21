@@ -3,7 +3,7 @@ import { ref } from "vue";
 import { constantRoutes, moduleRoutes } from "@/router";
 import { store } from "@/store";
 import router from "@/router";
-import MenuAPI from "@/api/system/menu";
+import { getRoutes as getRoutesFn } from "@/api/menu.js";
 import { treeFilter, treeFind, treeForEach } from "@/utils/tree.js";
 import { cloneDeep } from "lodash-es";
 import user from "@/utils/user";
@@ -39,7 +39,7 @@ export const usePermissionStore = defineStore("permission", () => {
       formatMenu(menuListStore);
       resolve();
     } else {
-      MenuAPI.getRoutes()
+      getRoutesFn()
         .then(data => {
           treeForEach(data, node => {
             node.title ||= node.name;
@@ -94,7 +94,8 @@ export const usePermissionStore = defineStore("permission", () => {
 
 function generateRoutesFromBackend(menuList, setUser = true) {
   const filterRoutes = treeFilter(cloneDeep(moduleRoutes), route => {
-    return treeFind(menuList, node => {
+    // 检查当前路由是否匹配菜单
+    const directMatch = treeFind(menuList, node => {
       const isMatch = node.router === route.path;
       if (isMatch) {
         route.title = node.name || route.meta.title;
@@ -104,6 +105,20 @@ function generateRoutesFromBackend(menuList, setUser = true) {
       }
       return isMatch;
     });
+
+    // 如果直接匹配，返回 true
+    if (directMatch) return true;
+
+    // 检查是否是某个菜单路由的子路由（详情页等）
+    const isChildRoute = treeFind(menuList, node => {
+      // 如果当前路由路径以菜单路径开头，且包含动态参数，则认为是子路由
+      return (
+        route.path.startsWith(node.router + "/") ||
+        (route.path.includes("/:") && route.path.replace(/\/:[^/]+/g, "") === node.router)
+      );
+    });
+
+    return !!isChildRoute;
   });
   setUser && user.setMenu(menuList);
   return filterRoutes;

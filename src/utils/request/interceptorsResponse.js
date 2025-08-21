@@ -1,5 +1,6 @@
-import { ElMessage, ElNotification } from "element-plus";
-import { ResultEnum } from "@/enums/ResultEnum.js";
+import { ElNotification, ElMessageBox } from "element-plus";
+import { closeLoading } from "@/utils/request/loading.js";
+import user from "@/utils/user.js";
 
 let isShowing = false;
 
@@ -19,15 +20,16 @@ const showMessage = (message, type = "error") => {
   isShowing = true;
 };
 
-const handleError = (response, code) => {
-  let msg;
-  try {
-    msg = JSON.parse(response.data.msg);
-    return msg[Object.keys(msg)[0]];
-  } catch (e) {
-    return response.data.msg;
-  }
-};
+function layoutMessageBox() {
+  ElMessageBox.confirm("登录已过期，请点击此处重新登录。", {
+    confirmButtonText: "重新登陆",
+    showCancelButton: false,
+    type: "warning",
+  }).then(() => {
+    user.clearAll();
+    location.reload();
+  });
+}
 
 const logErrorDetails = (response, code) => {
   console.group("业务逻辑错误");
@@ -44,42 +46,48 @@ const isWhiteListedUrl = url => whiteList.some(x => url.includes(x));
 
 const initInterceptorsResponse = instance => {
   instance.interceptors?.response.use(
-    async response => {
+    response => {
+      closeLoading();
       const url = response.config.url;
       if (isWhiteListedUrl(url)) {
         return response;
       }
 
-      const code = response.data.code;
       if (response.data instanceof Blob) {
         return response;
       }
 
-      if (code === ResultEnum.SUCCESS) {
-        return response.data.data;
-      } else if (["20004", "20005", "20006"].includes(code)) {
-        showMessage(`${response.config.url} ${response.data.msg}`);
-      } else {
-        const msg = handleError(response, code);
-        showMessage(msg);
+      const res = response.data;
+      const code = res.code;
+      if (code !== 0) {
         logErrorDetails(response, code);
+        if (code === -1 && res.message.includes("Unauthorized")) {
+          // to re-login
+          return layoutMessageBox();
+        }
+        showMessage(res.message || "Error");
         return Promise.reject(response);
       }
+      return res.data;
     },
     error => {
-      const status = error.response.status;
+      closeLoading();
+      const response = error.response;
+      const status = response.status;
       const msg = "请求出错";
       const type = status === 400 ? "warning" : "error";
 
-      const code = error.response.code;
+      if (!response) {
+        showMessage("网络异常，请检查网络后重试！");
+        return Promise.reject(error);
+      }
 
-      if (code === ResultEnum.ACCESS_TOKEN_INVALID) {
-        // Token 过期，刷新 Token
-        // return handleTokenRefresh(config);
-      } else if (code === ResultEnum.REFRESH_TOKEN_INVALID) {
-        return Promise.reject(new Error(msg || "Error"));
-      } else {
-        ElMessage.error(msg || "系统出错");
+      if (response.status === 401) {
+        return layoutMessageBox();
+      }
+
+      if (response.data?.message) {
+        return showMessage(response.data?.message, "error");
       }
 
       const map = {
@@ -90,7 +98,7 @@ const initInterceptorsResponse = instance => {
         405: "请求不被允许",
         500: "服务器错误",
       };
-      showMessage(map[status] || msg, type);
+      showMessage(map[status] || msg);
       return Promise.reject(error);
     }
   );
