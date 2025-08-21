@@ -12,7 +12,7 @@
 <script setup>
 import { useField } from "vee-validate";
 import { useRequired } from "@/composables/useForm.js";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 
 const props = defineProps({
   vid: {
@@ -22,10 +22,6 @@ const props = defineProps({
   label: {
     type: String,
     default: "",
-  },
-  modelValue: {
-    type: Array,
-    default: () => [],
   },
   options: {
     type: Array,
@@ -49,23 +45,41 @@ const props = defineProps({
   },
 });
 
+const modelValue = defineModel({
+  type: Array,
+  default: () => [],
+});
+
 const { value, errorMessage, handleBlur, setError } = useField(
   props.vid || props.label,
   props.rules,
   {
-    initialValue: props.modelValue,
+    initialValue: modelValue.value,
     label: props.label,
   }
 );
+
+// 双向同步 modelValue 和 useField 的 value
+watch(modelValue, newVal => {
+  if (newVal !== value.value) {
+    value.value = newVal;
+  }
+});
+
+watch(value, newVal => {
+  if (newVal !== modelValue.value) {
+    modelValue.value = newVal;
+  }
+});
 
 const isRequired = useRequired(props.rules);
 
 // 计算显示值
 const displayValue = computed(() => {
-  if (!props.options?.length || !props.modelValue?.length) return "";
+  if (!props.options?.length || !modelValue.value?.length) return "";
 
   return props.options
-    .filter(opt => props.modelValue.includes(opt[props.valueKey]))
+    .filter(opt => modelValue.value.includes(opt[props.valueKey]))
     .map(opt => opt[props.labelKey])
     .join(", ");
 });

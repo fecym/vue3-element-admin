@@ -18,7 +18,7 @@
 <script setup>
 import { useField } from "vee-validate";
 import { useRequired } from "@/composables/useForm.js";
-import { computed } from "vue";
+import { computed, watch, useAttrs } from "vue";
 
 const emit = defineEmits(["click"]);
 
@@ -29,10 +29,6 @@ const props = defineProps({
   },
   label: {
     type: String,
-    default: "",
-  },
-  modelValue: {
-    type: [String, Number, Array],
     default: "",
   },
   editable: {
@@ -49,14 +45,32 @@ const props = defineProps({
   },
 });
 
+const modelValue = defineModel({
+  type: [String, Number, Array],
+  default: "",
+});
+
 const { value, errorMessage, handleBlur, setError } = useField(
   props.vid || props.label,
   props.rules,
   {
-    initialValue: props.modelValue,
+    initialValue: modelValue.value,
     label: props.label,
   }
 );
+
+// 双向同步 modelValue 和 useField 的 value
+watch(modelValue, newVal => {
+  if (newVal !== value.value) {
+    value.value = newVal;
+  }
+});
+
+watch(value, newVal => {
+  if (newVal !== modelValue.value) {
+    modelValue.value = newVal;
+  }
+});
 
 const isRequired = useRequired(props.rules);
 
@@ -84,17 +98,18 @@ const labelKey = computed(() => mergedProps.value.label);
 const childrenKey = computed(() => mergedProps.value.children);
 
 const attrs = useAttrs();
+
 // 计算显示值
 const displayValue = computed(() => {
-  if (!props.modelValue) return "";
+  if (!modelValue.value) return "";
 
   // 从 $attrs 中获取 options
   const options = attrs.options || [];
   if (!options.length) return "";
 
   // 处理多选
-  if (Array.isArray(props.modelValue)) {
-    return props.modelValue
+  if (Array.isArray(modelValue.value)) {
+    return modelValue.value
       .map(value => {
         const findLabel = items => {
           for (const item of items) {
@@ -115,7 +130,7 @@ const displayValue = computed(() => {
   // 处理单选
   const findLabel = items => {
     for (const item of items) {
-      if (item[valueKey.value] === props.modelValue) return item[labelKey.value];
+      if (item[valueKey.value] === modelValue.value) return item[labelKey.value];
       if (item[childrenKey.value]) {
         const label = findLabel(item[childrenKey.value]);
         if (label) return label;

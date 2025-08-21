@@ -3,7 +3,7 @@
     <el-input
       v-if="editable"
       v-model="value"
-      :placeholder="`请输入${label}`"
+      :placeholder="`请输入${label.slice(0, -1)}`"
       v-bind="$attrs"
       @blur="handleBlur"
     />
@@ -14,6 +14,7 @@
 <script setup>
 import { useField } from "vee-validate";
 import { useLabel, useRequired } from "@/composables/useForm.js";
+import { watch } from "vue";
 
 const props = defineProps({
   vid: {
@@ -48,8 +49,26 @@ const { value, errorMessage, handleBlur, setError } = useField(
   {
     initialValue: props.modelValue,
     label: props.label,
+    validateOnValueUpdate: true,
+    syncVModel: true,
   }
 );
+
+// 监听modelValue变化，确保外部数据变化时能更新到组件内部
+// watch(
+//   () => props.modelValue,
+//   newVal => {
+//     if (newVal !== value.value) {
+//       value.value = newVal;
+//     }
+//   }
+// );
+
+// 监听内部value变化，向外部发送更新事件
+// const emit = defineEmits(["update:modelValue"]);
+// watch(value, newVal => {
+//   emit("update:modelValue", newVal);
+// });
 
 const isRequired = useRequired(props.rules);
 const label = useLabel(props);

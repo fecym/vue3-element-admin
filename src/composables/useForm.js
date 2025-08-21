@@ -3,7 +3,7 @@ import { computed } from "vue";
 /**
  * 判断传入的 rules 是否包含 'required' 规则
  * @param {string | object | array} rules 校验规则
- // * @returns {ComputedRef<boolean>} 是否是必填字段
+ * @returns {import('vue').ComputedRef<boolean>} 是否是必填字段
  */
 export function useRequired(rules) {
   return computed(() => {
@@ -14,7 +14,8 @@ export function useRequired(rules) {
       return rules.includes("required");
     }
     if (rules && typeof rules === "object") {
-      return Object.keys(rules).includes("required");
+      // 检查对象是否有 required 属性且值为 truthy
+      return "required" in rules && rules.required;
     }
     return false;
   });
