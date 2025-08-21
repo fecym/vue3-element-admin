@@ -1,5 +1,10 @@
 import dayjs from "dayjs";
 
+export * from "./message";
+export * from "./base";
+export * from "./file";
+export * from "./date";
+
 /**
  * 检查元素是否包含指定的类名
  * @param {HTMLElement} ele DOM元素

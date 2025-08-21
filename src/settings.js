@@ -15,7 +15,7 @@ const defaultSettings = {
   // 是否显示设置
   showSettings: true,
   // 是否显示标签视图
-  tagsView: true,
+  tagsView: false,
   // 是否显示侧边栏Logo
   sidebarLogo: true,
   // 布局方式，默认为左侧布局

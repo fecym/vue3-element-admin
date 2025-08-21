@@ -1,5 +1,11 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="账号资料" width="500px" @close="handleClose">
+  <el-dialog
+    v-model="dialogVisible"
+    custom-class="tcm-dialog has-bottom-line"
+    title="账号资料"
+    width="500px"
+    @close="handleClose"
+  >
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="昵称" prop="nickname">
         <el-input v-model="form.nickname" placeholder="请输入昵称" />
@@ -19,7 +25,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 import { ElMessage } from "element-plus";
 import Dict from "@/components/Dict/index.vue";
 const props = defineProps({

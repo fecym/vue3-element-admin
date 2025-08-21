@@ -1,0 +1,54 @@
+/* 弹窗公共样式 */
+.tcm-dialog {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: 0;
+  margin-top: 0;
+  transform: translate(-50%, -50%);
+
+  .el-dialog__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    margin-right: 0;
+    border-bottom: 1px solid var(--el-border-color-lighter);
+
+    .el-dialog__title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #0e1926;
+    }
+
+    .el-dialog__headerbtn {
+      position: static;
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .el-dialog__body {
+    padding: 0;
+  }
+
+  .dialog-container {
+    max-height: 60vh;
+    padding: 1.5rem 1.5rem 1rem;
+    overflow-y: auto;
+  }
+
+  .el-date-editor.el-input,
+  .el-date-editor.el-input__wrapper {
+    width: 100%;
+  }
+
+  .dialog-footer {
+    padding: 0 16px 16px;
+    text-align: right;
+  }
+
+  &.has-bottom-line .el-dialog__footer {
+    border-top: 1px solid var(--el-border-color-lighter);
+  }
+}

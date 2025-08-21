@@ -1,5 +1,11 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="修改密码" width="500px" @close="handleClose">
+  <el-dialog
+    v-model="dialogVisible"
+    custom-class="tcm-dialog has-bottom-line"
+    title="修改密码"
+    width="500px"
+    @close="handleClose"
+  >
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="原密码" prop="oldPassword">
         <el-input
@@ -37,7 +43,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 
 const props = defineProps({
   modelValue: Boolean,

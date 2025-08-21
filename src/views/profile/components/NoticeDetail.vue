@@ -1,6 +1,7 @@
 <template>
   <el-dialog
     v-model="visible"
+    custom-class="tcm-dialog has-bottom-line"
     :show-close="false"
     :fullscreen="isFullscreen"
     width="50%"

@@ -1,5 +1,11 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="绑定手机" width="500px" @close="handleClose">
+  <el-dialog
+    v-model="dialogVisible"
+    custom-class="tcm-dialog has-bottom-line"
+    title="绑定手机"
+    width="500px"
+    @close="handleClose"
+  >
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="手机号" prop="mobile">
         <el-input v-model="form.mobile" placeholder="请输入手机号" maxlength="11">
@@ -25,7 +31,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 
 const props = defineProps({
   modelValue: Boolean,

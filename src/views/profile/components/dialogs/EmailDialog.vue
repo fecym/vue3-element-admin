@@ -1,5 +1,11 @@
 <template>
-  <el-dialog v-model="dialogVisible" title="绑定邮箱" width="500px" @close="handleClose">
+  <el-dialog
+    v-model="dialogVisible"
+    custom-class="tcm-dialog has-bottom-line"
+    title="绑定邮箱"
+    width="500px"
+    @close="handleClose"
+  >
     <el-form ref="formRef" :model="form" :rules="rules" label-width="100px">
       <el-form-item label="邮箱" prop="email">
         <el-input v-model="form.email" placeholder="请输入邮箱">
@@ -25,7 +31,7 @@
 
 <script setup>
 import { ref, watch } from "vue";
-import UserAPI from "@/api/system/user";
+import UserAPI from "@/api/user.js";
 
 const props = defineProps({
   modelValue: Boolean,
